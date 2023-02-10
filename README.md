@@ -1,16 +1,10 @@
-# simple_notes_blueprint
+# Simple Notes
 
-A new Flutter project.
+Based on Template for flutter projects based on BLOC, use Firebase storege, auth and database for User login, save and upload notes and images.
 
-## Getting Started
+Just clone repo, install on device - Enjoy!
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![IMAGE 2023-02-10 19:02:42](https://user-images.githubusercontent.com/97367197/218153185-37950110-6b25-49ef-a1d0-4a2d82cd9cab.jpg)
+![IMAGE 2023-02-10 19:02:44](https://user-images.githubusercontent.com/97367197/218153216-c56b6f55-a737-426a-b5f7-5bb3bae3bec6.jpg)
+![IMAGE 2023-02-10 19:02:45](https://user-images.githubusercontent.com/97367197/218153242-263863ed-fb44-4ac6-ad52-269f43b1ab42.jpg)
