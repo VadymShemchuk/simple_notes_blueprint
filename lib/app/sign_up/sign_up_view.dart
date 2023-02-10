@@ -23,63 +23,67 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Positioned(
-              top: 40,
-              left: 40,
-              child: GestureDetector(
-                onTap: () => context.read<SignUpBloc>().add(OnSignUpEvent()),
-                child: const Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Positioned(
+                top: 40,
+                left: 40,
+                child: GestureDetector(
+                  onTap: () => context.read<SignUpBloc>().add(OnSignUpEvent()),
+                  child: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  LogoUtil.buildLogo(),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: TextFieldUtil.buildCustomTextField(
-                      type: TextFieldType.email,
-                      errorText: isEmailValid ? null : emailError,
-                      onTextFieldChanged: (email) => context
-                          .read<SignUpBloc>()
-                          .add(SignUpEmailChanged(email)),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LogoUtil.buildLogo(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: TextFieldUtil.buildCustomTextField(
+                        type: TextFieldType.email,
+                        errorText: isEmailValid ? null : emailError,
+                        onTextFieldChanged: (email) => context
+                            .read<SignUpBloc>()
+                            .add(SignUpEmailChanged(email)),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: TextFieldUtil.buildCustomTextField(
-                      type: TextFieldType.password,
-                      errorText: isPasswordValid ? null : passwordError,
-                      onTextFieldChanged: (password) => context
-                          .read<SignUpBloc>()
-                          .add(SignUpPasswordChanged(password)),
-                      onSecurePressed: () =>
-                          context.read<SignUpBloc>().add(SignUpChangeSecure()),
-                      changeSecureIcon: changeSecureIcon,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: TextFieldUtil.buildCustomTextField(
+                        type: TextFieldType.password,
+                        errorText: isPasswordValid ? null : passwordError,
+                        onTextFieldChanged: (password) => context
+                            .read<SignUpBloc>()
+                            .add(SignUpPasswordChanged(password)),
+                        onSecurePressed: () => context
+                            .read<SignUpBloc>()
+                            .add(SignUpChangeSecure()),
+                        changeSecureIcon: changeSecureIcon,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: ButtonUtil.buildCommonButton(
-                      context,
-                      onPressed: () =>
-                          context.read<SignUpBloc>().add(SignUpSibmitted()),
-                      buttonText: 'Sign Up',
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: ButtonUtil.buildCommonButton(
+                        context,
+                        onPressed: () =>
+                            context.read<SignUpBloc>().add(SignUpSibmitted()),
+                        buttonText: 'Sign Up',
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

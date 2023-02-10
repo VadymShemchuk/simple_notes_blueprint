@@ -25,80 +25,87 @@ class NoteItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Positioned(
-                top: 40,
-                left: 40,
-                child: GestureDetector(
-                  onTap: () => context.read<NoteItemBloc>().add(BackToList()),
-                  child: const Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 40,
+                  left: 40,
+                  child: GestureDetector(
+                    onTap: () => context.read<NoteItemBloc>().add(BackToList()),
+                    child: const Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    LogoUtil.buildLogo(),
-                    GestureDetector(
-                      onTap: () =>
-                          context.read<NoteItemBloc>().add(AddPhotoToNote()),
-                      child: image == null
-                          ? Container(
-                              height: 250,
-                              width: double.infinity,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          _Constants.imagePlaceHolder))),
-                            )
-                          : Image.file(
-                              image!,
-                              height: 250,
-                            ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: TextFieldUtil.buildCustomTextField(
-                        type: TextFieldType.noteTitle,
-                        onTextFieldChanged: (title) =>
-                            context.read<NoteItemBloc>().add(
-                                  NoteTitleChanged(title),
+                Positioned(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        LogoUtil.buildLogo(),
+                        GestureDetector(
+                          onTap: () => context
+                              .read<NoteItemBloc>()
+                              .add(AddPhotoToNote()),
+                          child: image == null
+                              ? Container(
+                                  height: 250,
+                                  width: double.infinity,
+                                  decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                              _Constants.imagePlaceHolder))),
+                                )
+                              : Image.file(
+                                  image!,
+                                  height: 250,
                                 ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: TextFieldUtil.buildNoteTextField(
-                        onTextFieldChanged: (text) =>
-                            context.read<NoteItemBloc>().add(
-                                  NoteTextChanged(text),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: TextFieldUtil.buildCustomTextField(
+                            type: TextFieldType.noteTitle,
+                            onTextFieldChanged: (title) =>
+                                context.read<NoteItemBloc>().add(
+                                      NoteTitleChanged(title),
+                                    ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: TextFieldUtil.buildNoteTextField(
+                            onTextFieldChanged: (text) =>
+                                context.read<NoteItemBloc>().add(
+                                      NoteTextChanged(text),
+                                    ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: status is Progress
+                              ? LoaderUtil.buildLoader()
+                              : ButtonUtil.buildCommonButton(
+                                  context,
+                                  onPressed: () => context
+                                      .read<NoteItemBloc>()
+                                      .add(SaveNote()),
+                                  buttonText: 'Save note',
                                 ),
-                      ),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: status is Progress
-                          ? LoaderUtil.buildLoader()
-                          : ButtonUtil.buildCommonButton(
-                              context,
-                              onPressed: () =>
-                                  context.read<NoteItemBloc>().add(SaveNote()),
-                              buttonText: 'Save note',
-                            ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
