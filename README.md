@@ -1,6 +1,6 @@
 # Simple Notes
 
-Based on Template for flutter projects based on BLOC, use Firebase storege, auth and database for User login, save and upload notes and images.
+Flutter projects based on BLOC, use Firebase storage, auth and database for User auth, save and upload notes and images.
 
 Just clone repo, install on device - Enjoy!
 
